@@ -6,7 +6,7 @@
 
 int main() {
     
-   int comp_board[size][size], i, i2;
+   int *comp_board[size][size], i, i2;
    
    for (i=0; i<6; i++) {
      for (i2=0; i2<6, i2++) {
