@@ -6,7 +6,7 @@ Version: 1.0 Feb 24, 2026
 Resources:
 */
 
-#define BOARD_SIZE 10
+#define BOARD_SIZE 6
 
 #include <stdio.h>
 #include <stdlib.h>
