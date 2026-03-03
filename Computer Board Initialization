@@ -1,36 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> 
+#include <time.h>
 
 #define size 6
 
 int main() {
-    
-   int *comp_board[size][size], i, i2;
-   
-   for (i=0; i<6; i++) {
-     for (i2=0; i2<6, i2++) {
-         
-        if (numrand == 0) {
-          comp_board[i][i2] = 0;
-          continue; 
-        }
-          
-        if (numrand == 1) {
-          switch (boat_size) 
-          case 1: 
-            fourBoats(*comp_board); 
-            break;
-          case 2:
-            threeBoats(*comp_board);
-            break;
-          case 3:
-            twoBoats(*comp_board);
-            break;
-          
-        }
-          
-     } 
-   }
-   
+
+	int comp_board[size][size], i=1, i2, strhor, strver;
+
+	srand(time(NULL));
+
+
+
+	for (i=0; i<6; i++) {
+		for (i2=0; i2<6; i2++) {
+			comp_board[i][i2] = 0;    // 6x6 filled with zeros
+		}
+	}
+
+	while (i = 1) {
+		strhor = 0;
+		strver = 0;
+		comp_board[strhor][strver] = 1;   // random starting position
+
+		if (rand()%2+ 1 == 1) {   // horizontal
+			for (i2 = 0; i2 < 3; i2++) {
+			    strhor++;
+				comp_board[strhor][strver] = 1;
+			}
+			
+		    i = 0;
+		}
+
+		if (rand()%2+ 1 != 1) { //vertical
+			for (i2 = 0; i2 < 3; i2++) {
+			    strver++; 
+				comp_board[strhor][strver] = 1;
+			}
+			
+			i = 0;
+		}
+
+	}
+	
+	for (i=0; i<6; i++) {
+		for (i2=0; i2<6; i2++) {
+    // 6x6 filled with zeros
+			printf("%d", comp_board[i][i2]);
+		}
+		printf("\n");
+	}
+
 }
