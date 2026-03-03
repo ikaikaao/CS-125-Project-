@@ -6,7 +6,7 @@
 
 int main() {
 
-	int comp_board[size][size], i, i2, strhor, strver, condition;
+	int comp_board[size][size], i, i2, strhor, strver, condition, iteration=1;
 
 	srand(time(NULL));
 
@@ -17,26 +17,36 @@ int main() {
 			comp_board[i][i2] = 0;    // 6x6 filled with zeros
 		}
 	}
-
+    
+    while (iteration == 1) {  
 		strhor = rand()%6;
 		strver = rand()%6;
-		comp_board[strhor][strver] = 1;   // random starting position
-
-		if (condition == 1) {   // horizontal
-			for (i2 = 0; i2 < 3; i2++) {
-			    strhor++;
-				comp_board[strhor][strver] = 1;
-			}
 		
+		if (strhor < 3) { 
+		    iteration = 0;
 		}
+		if (strver < 3) { 
+		    iteration = 0; 
+		}
+    }
+		
+	comp_board[strhor][strver] = 1;   // random starting position
 
-		if (condition != 1) { //vertical
-			for (i2 = 0; i2 < 3; i2++) {
-			    strver++; 
-				comp_board[strhor][strver] = 1;
-			}
-			
+	if (condition == 1) {   // horizontal
+		for (i2 = 0; i2 < 3; i2++) {
+		strhor++;
+		comp_board[strhor][strver] = 1;
 		}
+		
+	}
+
+	if (condition != 1) { //vertical
+		for (i2 = 0; i2 < 3; i2++) {
+		strver++; 
+		comp_board[strhor][strver] = 1;
+	    }
+			
+	}
 	
 	for (i=0; i<6; i++) {
 		for (i2=0; i2<6; i2++) {
