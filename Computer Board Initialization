@@ -17,18 +17,13 @@ int main() {
 			comp_board[i][i2] = 0;    // 6x6 filled with zeros
 		}
 	}
+ 
+ 
+// 4boat    
+	strhor = rand()%3;
+	strver = rand()%3;
     
-    while (iteration == 1) {  
-		strhor = rand()%6;
-		strver = rand()%6;
-		
-		if (strhor < 3) { 
-		    iteration = 0;
-		}
-		if (strver < 3) { 
-		    iteration = 0; 
-		}
-    }
+    printf ("%d  %d\n", strhor, strver);
 		
 	comp_board[strhor][strver] = 1;   // random starting position
 
@@ -40,14 +35,14 @@ int main() {
 		
 	}
 
-	if (condition != 1) { //vertical
+	if (condition != 1) {   //vertical
 		for (i2 = 0; i2 < 3; i2++) {
 		strver++; 
 		comp_board[strhor][strver] = 1;
 	    }
 			
 	}
-	
+
 	for (i=0; i<6; i++) {
 		for (i2=0; i2<6; i2++) {
     // 6x6 filled with zeros
