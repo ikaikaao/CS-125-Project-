@@ -10,8 +10,6 @@ int main() {
 
 	srand(time(NULL));
 
-    condition = rand()%2+ 1;
-
 	for (i=0; i<6; i++) {
 		for (i2=0; i2<6; i2++) {
 			comp_board[i][i2] = 0;    // 6x6 filled with zeros
@@ -26,6 +24,7 @@ int main() {
     printf ("%d  %d\n", strhor, strver);
 		
 	comp_board[strhor][strver] = 1;   // random starting position
+	condition = rand()%2+ 1;
 
 	if (condition == 1) {   // horizontal
 		for (i2 = 0; i2 < 3; i2++) {
@@ -42,6 +41,49 @@ int main() {
 	    }
 			
 	}
+
+// 3boat    
+	strhor = rand()%4;
+	strver = rand()%4;
+    
+    printf ("%d  %d\n", strhor, strver);
+		
+	comp_board[strhor][strver] = 1;   // random starting position
+	condition = rand()%2+ 1;
+
+	if (condition == 1) {   // horizontal
+		for (i2 = 0; i2 < 2; i2++) {
+		strhor++;
+		comp_board[strhor][strver] = 1;
+		}
+		
+	}
+
+	if (condition != 1) {   //vertical
+		for (i2 = 0; i2 < 2; i2++) {
+		strver++; 
+		comp_board[strhor][strver] = 1;
+	    }
+			
+	}
+	
+// 2boat    
+	strhor = rand()%5;
+	strver = rand()%5;
+    
+    printf ("%d  %d\n", strhor, strver);
+		
+	comp_board[strhor][strver] = 1;   // random starting position
+	condition = rand()%2+ 1;
+
+	if (condition == 1) {   // horizontal
+		comp_board[strhor++][strver] = 1;
+		}
+		
+	if (condition != 1) {   //vertical
+		comp_board[strhor][strver++] = 1;
+	    }
+			
 
 	for (i=0; i<6; i++) {
 		for (i2=0; i2<6; i2++) {
