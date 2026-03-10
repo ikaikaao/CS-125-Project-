@@ -17,6 +17,8 @@ void toProperCase(char *str);
 
 void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZE][BOARD_SIZE]);
 
+void printBoard();
+
 int main()
 {
       char so1, so2, so3, sy1, sy2, sy3;
@@ -25,8 +27,11 @@ int main()
       int board[BOARD_SIZE][BOARD_SIZE] = {0};
 
       getShip(4, &so1, &sx1, &sy1, board);
+      printBoard;
       getShip(3, &so2, &sx2, &sy2, board);
+      printBoard;
       getShip(2, &so3, &sx3, &sy3, board);
+      printBoard;
       
       return 0;
 }
@@ -140,7 +145,27 @@ void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZ
           {
               board[row + i][col] = 1;
           }
-      }
-      
+      }      
+}
 
+void printBoard()
+{
+
+      printf("+---------------------------+\n");                // Line 1
+      printf("|         BattleShip        |\n");                // Line 2
+      printf("+---+---+---+---+---+---+---+\n");                // Line 3
+      printf("|   | 1 | 2 | 3 | 4 | 5 | 6 |\n");                // Line 4
+      printf("+---+---+---+---+---+---+---+\n");                // Line 5
+      printf("| a |   |   |   |   |   |   |\n");                // Line 6: Depends on user input
+      printf("+---+---+---+---+---+---+---+\n");                // Line 7
+      printf("| b |   |   |   |   |   |   |\n");                // Line 8: Depends on user input
+      printf("+---+---+---+---+---+---+---+\n");                // Line 9
+      printf("| c |   |   |   |   |   |   |\n");                // Line 10: Depends on user input
+      printf("+---+---+---+---+---+---+---+\n");                // Line 11
+      printf("| d |   |   |   |   |   |   |\n");                // Line 12: Depends on user input
+      printf("+---+---+---+---+---+---+---+\n");                // Line 13
+      printf("| e |   |   |   |   |   |   |\n");                // Line 14: Depends on user input
+      printf("+---+---+---+---+---+---+---+\n");                // Line 15
+      printf("| f |   |   |   |   |   |   |\n");                // Line 16: Depends on user input
+      printf("+---+---+---+---+---+---+---+\n");                // Line 17
 }
