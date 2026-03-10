@@ -27,7 +27,7 @@ int main()
       getShip(4, &so1, &sx1, &sy1, board);
       getShip(3, &so2, &sx2, &sy2, board);
       getShip(2, &so3, &sx3, &sy3, board);
-
+      
       return 0;
 }
 
@@ -141,5 +141,6 @@ void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZ
               board[row + i][col] = 1;
           }
       }
+      
 
 }
