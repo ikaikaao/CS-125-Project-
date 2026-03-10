@@ -77,11 +77,11 @@ int main() {
 	condition = rand()%2+ 1;
 
 	if (condition == 1) {   // horizontal
-		comp_board[strhor++][strver] = 1;
+		comp_board[strhor=strhor+ 1][strver] = 1;
 		}
 		
 	if (condition != 1) {   //vertical
-		comp_board[strhor][strver++] = 1;
+		comp_board[strhor][strver= strver+ 1] = 1;
 	    }
 			
 
