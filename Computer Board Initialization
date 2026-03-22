@@ -93,8 +93,6 @@ void getCompShip(int comp_board[size][size]) {
             v = (condition == 0) ? strver : strver + i;
             comp_board[h][v] = 1;
         }
-
-        // if we made it here → no overlap
         iteration = 0;
     }
 
