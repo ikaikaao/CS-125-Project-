@@ -4,109 +4,106 @@
 
 #define size 6
 
-void fourBoat(int comp_board[size][size]);
-void threeBoat(int comp_board[size][size]);
-void twoBoat(int comp_board[size][size]);
+void getCompShip(int comp_board[size][size]);
 
 int main() {
 
     int comp_board[size][size];
-    int i, j;
 
     srand(time(NULL));
 
-    // fill board with zeros
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
-            comp_board[i][j] = 0;
+    getCompShip(comp_board);
+
+    return 0;
+}
+
+void getCompShip(int comp_board[size][size]) {
+
+    int i, j, strhor, strver, condition, overlap, h, v, iteration=1;
+
+    while (iteration == 1) {
+
+        // reset board
+        for (i = 0; i < size; i++) {
+            for (j = 0; j < size; j++) {
+                comp_board[i][j] = 0;
+            }
         }
+
+        overlap = 0;
+
+        // ---------- 4 BOAT ----------
+        strhor = rand() % 3;
+        strver = rand() % 3;
+        printf("%d  %d\n", strhor, strver);
+        condition = rand() % 2;
+
+        for (i = 0; i < 4; i++) {
+            h = (condition == 0) ? strhor + i : strhor;
+            v = (condition == 0) ? strver : strver + i;
+            comp_board[h][v] = 1;
+        }
+
+        // ---------- 3 BOAT ----------
+        strhor = rand() % 4;
+        strver = rand() % 4;
+        printf("%d  %d\n", strhor, strver);
+        condition = rand() % 2;
+
+        for (i = 0; i < 3; i++) {
+            h = (condition == 0) ? strhor + i : strhor;
+            v = (condition == 0) ? strver : strver + i;
+
+            if (comp_board[h][v] == 1) {
+              overlap = 1;
+            }
+        }
+
+        if (overlap==1) { 
+           continue;
+        }
+
+        for (i = 0; i < 3; i++) {
+            h = (condition == 0) ? strhor + i : strhor;
+            v = (condition == 0) ? strver : strver + i;
+            comp_board[h][v] = 1;
+        }
+
+        // ---------- 2 BOAT ----------
+        strhor = rand() % 5;
+        strver = rand() % 5;
+        printf("%d  %d\n", strhor, strver);
+        condition = rand() % 2;
+
+        for (i = 0; i < 2; i++) {
+            h = (condition == 0) ? strhor + i : strhor;
+            v = (condition == 0) ? strver : strver + i;
+
+            if (comp_board[h][v] == 1) {
+              overlap = 1;
+            }
+        }
+
+        if (overlap==1) { 
+           continue;
+        }
+
+        for (i = 0; i < 2; i++) {
+            h = (condition == 0) ? strhor + i : strhor;
+            v = (condition == 0) ? strver : strver + i;
+            comp_board[h][v] = 1;
+        }
+
+        // if we made it here → no overlap
+        iteration = 0;
     }
 
-    fourBoat(comp_board);
-    threeBoat(comp_board);
-    twoBoat(comp_board);
-
     // print board
+    printf("\nFinal Board:\n");
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
             printf("%d ", comp_board[i][j]);
         }
         printf("\n");
-    }
-
-    return 0;
-}
-
-
-// 4 boat
-void fourBoat(int comp_board[size][size]) {
-
-    int i, strhor, strver, condition;
-
-    strhor = rand() % 3;
-    strver = rand() % 3;
-
-    printf("%d %d\n", strhor, strver);
-
-    comp_board[strhor][strver] = 1;
-
-    condition = rand() % 2;
-
-    if (condition == 0) {   // horizontal
-        for (i = 1; i < 4; i++) {
-            comp_board[strhor + i][strver] = 1;
-        }
-    } else {                // vertical
-        for (i = 1; i < 4; i++) {
-            comp_board[strhor][strver + i] = 1;
-        }
-    }
-}
-
-
-// 3 boat
-void threeBoat(int comp_board[size][size]) {
-
-    int i, strhor, strver, condition;
-
-    strhor = rand() % 4;
-    strver = rand() % 4;
-
-    printf("%d %d\n", strhor, strver);
-
-    comp_board[strhor][strver] = 1;
-
-    condition = rand() % 2;
-
-    if (condition == 0) {
-        for (i = 1; i < 3; i++) {
-            comp_board[strhor + i][strver] = 1;
-        }
-    } else {
-        for (i = 1; i < 3; i++) {
-            comp_board[strhor][strver + i] = 1;
-        }
-    }
-}
-
-
-// 2 boat
-void twoBoat(int comp_board[size][size]) {
-
-    int strhor, strver, condition;
-
-    strhor = rand() % 5;
-    strver = rand() % 5;
-
-    printf("%d %d\n", strhor, strver);
-
-    comp_board[strhor][strver] = 1;
-
-    condition = rand() % 2;
-
-    if (condition == 0) {
-        comp_board[strhor + 1][strver] = 1;
-    } else {
-        comp_board[strhor][strver + 1] = 1;
     }
 }
