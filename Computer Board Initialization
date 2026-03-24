@@ -6,16 +6,98 @@
 
 void getCompShip(int comp_board[size][size]);
 
+void turnComp(int comp_board[size][size]); 
+
 int main() {
 
-    int comp_board[size][size];
+    int comp_board[size][size], i, j;
 
     srand(time(NULL));
 
     getCompShip(comp_board);
+    
+    printf("\n");
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            printf("%d ", comp_board[i][j]);
+        }
+        printf("\n");
+    }
+    
+    turnComp(comp_board);  //Should be player board as input
+    
+    printf("\n");
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            printf("%d ", comp_board[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
+
+void turnComp(int comp_board[size][size]) {  //Using computers board for testing should be player board
+    
+    int strhor, strver, iteration, h, v, condition, i, sign;     //All instances with computer board array replace with player board
+    
+    printf("\nComputers Turn\n"); 
+    
+    strhor = rand() % 6; 
+    strver = rand() % 6;
+    condition = rand() % 2;
+    sign = rand() % 2;
+    
+    if (comp_board[strhor][strver] == 1) {   // Hit Case
+            comp_board[strhor][strver] = 2; 
+            iteration = 1;
+    }
+        
+    if (comp_board[strhor][strver] == 0) {   // Miss Case
+            iteration = 0; 
+            printf("Miss");
+    }
+    
+    while (iteration == 1) {
+        
+        if (sign == 0) { 
+            for (i = 0; i < 4; i++) { 
+              h = (condition == 0)? strhor + 1 : strhor;
+              v = (condition == 0)? strver : strver + 1;
+              
+              if (comp_board[h][v] == 1) {
+                  comp_board[h][v] = 2;
+              }
+              
+              if (comp_board[h][v] == 0) {
+                  printf("Miss");
+                  iteration = 0; 
+                  break; 
+              }
+            }
+        }
+        
+        if (sign != 0) {
+            for (i = 0; i < 4; i++) { 
+              h = (condition == 0)? strhor - 1 : strhor;
+              v = (condition == 0)? strver : strver - 1;
+              
+              if (comp_board[h][v] == 1) {
+                  comp_board[h][v] = 2;
+              }
+              
+              if (comp_board[h][v] == 0) {
+                  printf("Miss");
+                  iteration = 0; 
+                  break; 
+              }
+            }
+        }
+    }
+        
+}
+    
+
 
 void getCompShip(int comp_board[size][size]) {
 
@@ -35,7 +117,6 @@ void getCompShip(int comp_board[size][size]) {
         // ---------- 4 BOAT ----------
         strhor = rand() % 3;
         strver = rand() % 3;
-        printf("%d  %d\n", strhor, strver);
         condition = rand() % 2;
 
         for (i = 0; i < 4; i++) {
@@ -47,7 +128,6 @@ void getCompShip(int comp_board[size][size]) {
         // ---------- 3 BOAT ----------
         strhor = rand() % 4;
         strver = rand() % 4;
-        printf("%d  %d\n", strhor, strver);
         condition = rand() % 2;
 
         for (i = 0; i < 3; i++) {
@@ -72,7 +152,6 @@ void getCompShip(int comp_board[size][size]) {
         // ---------- 2 BOAT ----------
         strhor = rand() % 5;
         strver = rand() % 5;
-        printf("%d  %d\n", strhor, strver);
         condition = rand() % 2;
 
         for (i = 0; i < 2; i++) {
@@ -94,14 +173,5 @@ void getCompShip(int comp_board[size][size]) {
             comp_board[h][v] = 1;
         }
         iteration = 0;
-    }
-
-    // print board
-    printf("\n");
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
-            printf("%d ", comp_board[i][j]);
-        }
-        printf("\n");
     }
 }
