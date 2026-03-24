@@ -2,8 +2,8 @@
 File: Battleship.c
 Authors: Aidan Monsen and Ikaikaokealohilani Ofsthun
 Purpose: Recreate Battleship in C
-Version: 1.3 Mar 24, 2026
-Resources:
+Version: 1.2 Mar 10, 2026
+Resources: 
 */
 
 #define BOARD_SIZE 6
@@ -12,30 +12,39 @@ Resources:
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
+#include "computerShips.h"
+#include "playerShips.h"
 
-void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZE][BOARD_SIZE]);
+void getShip(int length, char *orientation, int *x, char *y, int Pboard[BOARD_SIZE][BOARD_SIZE]);
 
-void printBoard(int board[BOARD_SIZE][BOARD_SIZE]);
+void printPlayerBoard(int Pboard[BOARD_SIZE][BOARD_SIZE]);
+
+void printEnemyBoard(int Cboard[BOARD_SIZE][BOARD_SIZE]);
 
 int main()
 {
       char so1, so2, so3, sy1, sy2, sy3;
       int sx1, sx2, sx3;
       
-      int board[BOARD_SIZE][BOARD_SIZE] = {0};
+      int Pboard[BOARD_SIZE][BOARD_SIZE] = {0};
+      
+      // TEST BOARD UNTIL WE CAN MOVE BOARD OVER FROM COMPUTER INITALIZATION CODE
+      int Cboard[BOARD_SIZE][BOARD_SIZE] = {0};
 
-      printBoard(board);
-      getShip(4, &so1, &sx1, &sy1, board);
-      printBoard(board);
-      getShip(3, &so2, &sx2, &sy2, board);
-      printBoard(board);
-      getShip(2, &so3, &sx3, &sy3, board);
-      printBoard(board);
+      printPlayerBoard(Pboard);
+      getShip(4, &so1, &sx1, &sy1, Pboard);
+      printPlayerBoard(Pboard);
+      getShip(3, &so2, &sx2, &sy2, Pboard);
+      printPlayerBoard(Pboard);
+      getShip(2, &so3, &sx3, &sy3, Pboard);
+      printPlayerBoard(Pboard);
+      
+      printEnemyBoard(Cboard);
       
       return 0;
 }
 
-void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZE][BOARD_SIZE])
+void getShip(int length, char *orientation, int *x, char *y, int Pboard[BOARD_SIZE][BOARD_SIZE])
 {
       int i, overlap;
       
@@ -92,7 +101,7 @@ void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZ
           {
               for (i = 0; i < length; i++)
               {
-                  if (board[row][col + i] == 1)
+                  if (Pboard[row][col + i] == 1)
                   {
                       overlap = 1;
                   }
@@ -103,7 +112,7 @@ void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZ
           {
               for (i = 0; i < length; i++)
               {
-                  if (board[row + i][col] == 1)
+                  if (Pboard[row + i][col] == 1)
                   {
                       overlap = 1;
                   }
@@ -125,19 +134,20 @@ void getShip(int length, char *orientation, int *x, char *y, int board[BOARD_SIZ
       {
           for (i = 0; i < length; i++)
           {
-              board[row][col + i] = 1;
+              Pboard[row][col + i] = 1;
           }
       }
       else
       {
           for (i = 0; i < length; i++)
           {
-              board[row + i][col] = 1;
+              Pboard[row + i][col] = 1;
           }
       }      
 }
 
-void printBoard(int board[BOARD_SIZE][BOARD_SIZE])
+// Gets the players board
+void printPlayerBoard(int Pboard[BOARD_SIZE][BOARD_SIZE])
 {
 
       int p[6][6] = {0};
@@ -151,7 +161,7 @@ void printBoard(int board[BOARD_SIZE][BOARD_SIZE])
       {
           for (i = 0; i < 6; i++)
           {
-              if (board[row + k][col + i] == 1)
+              if (Pboard[row + k][col + i] == 1)
               {
                   p[k][i] = 1;
               }
@@ -159,7 +169,7 @@ void printBoard(int board[BOARD_SIZE][BOARD_SIZE])
       }
 
       printf("+---------------------------+\n");                                                                    // Line 1
-      printf("|         BattleShip        |\n");                                                                    // Line 2
+      printf("|           Player          |\n");                                                                    // Line 2
       printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 3
       printf("|   | 1 | 2 | 3 | 4 | 5 | 6 |\n");                                                                    // Line 4
       printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 5
@@ -176,5 +186,44 @@ void printBoard(int board[BOARD_SIZE][BOARD_SIZE])
       printf("| F | %d | %d | %d | %d | %d | %d |\n", p[5][0], p[5][1], p[5][2], p[5][3], p[5][4], p[5][5]);        // Line 16: Depends on user input
       printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 17
       
+
+}
+
+// Gets the computers board
+void printEnemyBoard(int Cboard[BOARD_SIZE][BOARD_SIZE])
+{
+
+      int c[6][6];
+      int row = 0;
+      int col = 0;
+      int i, k;
+      
+      // blank is no interaction yet, O = miss, X = hit
+      
+      for (k = 0; k < 6; k++)
+      {
+          for (i = 0; i < 6; i++)
+          {
+              c[k][i] = ' ';
+          }
+      }
+      
+      printf("+---------------------------+\n");                                                                    // Line 1
+      printf("|          Computer         |\n");                                                                    // Line 2
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 3
+      printf("|   | 1 | 2 | 3 | 4 | 5 | 6 |\n");                                                                    // Line 4
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 5
+      printf("| A | %c | %c | %c | %c | %c | %c |\n", c[0][0], c[0][1], c[0][2], c[0][3], c[0][4], c[0][5]);        // Line 6
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 7
+      printf("| B | %c | %c | %c | %c | %c | %c |\n", c[1][0], c[1][1], c[1][2], c[1][3], c[1][4], c[1][5]);        // Line 8
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 9
+      printf("| C | %c | %c | %c | %c | %c | %c |\n", c[2][0], c[2][1], c[2][2], c[2][3], c[2][4], c[2][5]);        // Line 10
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 11
+      printf("| D | %c | %c | %c | %c | %c | %c |\n", c[3][0], c[3][1], c[3][2], c[3][3], c[3][4], c[3][5]);        // Line 12
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 13
+      printf("| E | %c | %c | %c | %c | %c | %c |\n", c[4][0], c[4][1], c[4][2], c[4][3], c[4][4], c[4][5]);        // Line 14
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 15
+      printf("| F | %c | %c | %c | %c | %c | %c |\n", c[5][0], c[5][1], c[5][2], c[5][3], c[5][4], c[5][5]);        // Line 16
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 17
 
 }
