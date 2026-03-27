@@ -2,7 +2,7 @@
 File: Battleship.c
 Authors: Aidan Monsen and Ikaikaokealohilani Ofsthun
 Purpose: Recreate Battleship in C
-Version: 1.4 Mar 25, 2026
+Version: 1.5 Mar 27, 2026
 Resources: 
 */
 
