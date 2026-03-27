@@ -2,7 +2,7 @@
 File: playerShips.h
 Author: Aidan Monsen
 Purpose: Create a structure to track the players ships health
-Version: 1.0 Mar 24, 2026
+Version: 1.1 Mar 27, 2026
 Resources:
 */
 
@@ -10,7 +10,7 @@ Resources:
 typedef struct 
 {
 
-      int p[4] = {1, 1, 1, 1};
+      int p[4];
 
 } P4Ship;
 
@@ -18,7 +18,7 @@ typedef struct
 typedef struct
 {
 
-      int p[3] = {1, 1, 1};
+      int p[3];
 
 } P3Ship;
 
@@ -26,6 +26,6 @@ typedef struct
 typedef struct
 {
 
-      int p[2] = {1, 1};
+      int p[2];
 
 } P2Ship;
