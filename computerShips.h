@@ -2,7 +2,7 @@
 File: computerShips.h
 Author: Aidan Monsen
 Purpose: Create a structure to track the computers ships health
-Version: 1.0 Mar 24, 2026
+Version: 1.1 Mar 27, 2026
 Resources:
 */
 
@@ -10,7 +10,7 @@ Resources:
 typedef struct 
 {
 
-      int c[4] = {1, 1, 1, 1};
+      int c[4];
 
 } C4Ship;
 
@@ -18,7 +18,7 @@ typedef struct
 typedef struct
 {
 
-      int c[3] = {1, 1, 1};
+      int c[3];
 
 } C3Ship;
 
@@ -26,6 +26,6 @@ typedef struct
 typedef struct
 {
 
-      int c[2] = {1, 1};
+      int c[2];
 
 } C2Ship;
