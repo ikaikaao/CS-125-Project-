@@ -21,8 +21,8 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 	condition = rand()%2;
 	sign = rand()%2;
 
-	if (Pboard[strhor][strver] == 'S') {   // Hit Case
-		Pboard[strhor][strver] = 'X';
+	if (Pboard[strhor][strver] == 1) {   // Hit Case
+		Pboard[strhor][strver] = 2;
 		iteration = 1;
    printf("Hit, computer takes another turn\n");
 	} else {   // Miss Case
