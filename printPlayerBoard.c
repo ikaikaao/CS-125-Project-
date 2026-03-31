@@ -29,6 +29,11 @@ void printPlayerBoard(int Pboard[BOARD_SIZE][BOARD_SIZE])
                   p[k][i] = 'S';
               }
               
+              else if (Pboard[row + k][col + i] == 2)
+              {
+                  p[k][i] = 'X';
+              }
+              
               else
               {
                   p[k][i] = ' ';
