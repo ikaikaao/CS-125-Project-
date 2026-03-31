@@ -16,16 +16,18 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 
 	printf("\nComputers Turn\n");
 
-	strhor = rand() % 6;
-	strver = rand() % 6;
-	condition = rand() % 2;
-	sign = rand() % 2;
+	strhor = rand()%6;
+	strver = rand()%6;
+	condition = rand()%2;
+	sign = rand()%2;
 
-	if (Pboard[strhor][strver] == 1) {   // Hit Case
-		Pboard[strhor][strver] = 2;
+	if (Pboard[strhor][strver] == 'S') {   // Hit Case
+		Pboard[strhor][strver] = 'X';
 		iteration = 1;
+   printf("Hit, computer takes another turn\n");
 	} else {   // Miss Case
 		iteration = 0;
+   printf("Miss, your turn\n");
 	}
 
 	while (iteration == 1) {
@@ -45,8 +47,8 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 				break;
 			}
 
-			if (Pboard[h][v] == 1) {
-				Pboard[h][v] = 2;
+			if (Pboard[h][v] == 'S') {
+				Pboard[h][v] = ' ';
 			} else {
 				iteration = 0;
 				break;
