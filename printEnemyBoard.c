@@ -10,7 +10,7 @@ Resources:
 
 #include <stdio.h>
 
-void printEnemyBoard(int Cboard[BOARD_SIZE][BOARD_SIZE])
+void printEnemyBoard(int CPboard[BOARD_SIZE][BOARD_SIZE])
 {
 
       int c[6][6];
@@ -25,12 +25,20 @@ void printEnemyBoard(int Cboard[BOARD_SIZE][BOARD_SIZE])
           for (i = 0; i < 6; i++)
           {
               c[k][i] = ' ';
+              
+              if (CPboard[k][i] == 1)
+              {
+                  c[k][i] = 'X';
+              }
+              
+              else if (CPboard[k][i] == 2)
+              {
+                  c[k][i] = 'O';
+              }
           }
       }
       
-      // TEST VALUE FOR A HIT
-      char test = 'X';
-      c[1][1] = test;
+
       
       printf("+---------------------------+\n");                                                                    // Line 1
       printf("|          Computer         |\n");                                                                    // Line 2
