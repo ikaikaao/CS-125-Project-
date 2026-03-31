@@ -19,6 +19,7 @@ Resources:
 #include "printEnemyBoard.h"
 #include "getCompShip.h"
 #include "turnComp.h"
+#include "turnPlayer.h"
 
 int main()
 {
@@ -51,14 +52,18 @@ int main()
       
       // Initalizing the computer board state
       int Cboard[BOARD_SIZE][BOARD_SIZE], i, j, x;
+      int CPboard[BOARD_SIZE][BOARD_SIZE] = {0};
       
       getCompShip(Cboard);
-      printEnemyBoard(Cboard);
+      printEnemyBoard(CPboard);
       
       // Start computers turn
-      turnComp(Pboard);
-      
+      turnComp(Pboard);  
       printPlayerBoard(Pboard);
+      
+      // Start players turn
+      turnPlayer(Cboard, CPboard);
+      printEnemyBoard(CPboard);
       
       return 0;
 }
