@@ -30,7 +30,7 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
    printf("Miss, your turn\n");
 	}
 
-	while (iteration == 1) {
+    while (iteration == 1) {
 
 		for (i = 1; i < 4; i++) {
 
@@ -41,10 +41,19 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 				h = (condition == 0)? strhor - i : strhor;
 				v = (condition == 0)? strver : strver - i;
 			}
-
-			if ((h < 0) || (h >= BOARD_SIZE) || (v < 0) || (v >= BOARD_SIZE)) {
-				iteration = 0;
-				break;
+			
+			if ((h < 0) || (v < 0)) {
+                sign = 0;
+                i = 1; 
+                continue;
+				
+			}
+			
+			if ((h >= BOARD_SIZE) || (v >= BOARD_SIZE)) {
+			    sign = 1;
+			    i = 1;
+			    continue;
+			    
 			}
 
 			if (Pboard[h][v] == 'S') {
