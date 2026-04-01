@@ -40,10 +40,14 @@ void turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOAR
       if (Cboard[rowIndex][colIndex] == 1)
       {
           CPboard[rowIndex][colIndex] = 1;
+          printf("(%d,%c)\n", col, row);
+          printf("\nHit, take another turn\n");
       }
       
       else if (Cboard[rowIndex][colIndex] == 0)
       {
           CPboard[rowIndex][colIndex] = 2;
+          printf("(%d,%c)\n", col, row);
+          printf("\nMiss, computer's turn\n"); 
       }
 }
