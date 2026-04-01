@@ -21,7 +21,7 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 	condition = rand()%2;
 	sign = rand()%2;
 
-	printf("%d  %d \n", strhor,strver);
+   	printf("(%d,%c) \n", strhor + 1,strver + 'A');
 
 	if (Pboard[strhor][strver] == 1) {   // Hit Case
 		Pboard[strhor][strver] = 2;
@@ -70,6 +70,8 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 				i = 0;
 				continue;
 			}
+
+   	    printf("(%d,%c) \n", h + 1,v + 'A');
 
 			if (Pboard[h][v] == 1) {
 				Pboard[h][v] = 2;
