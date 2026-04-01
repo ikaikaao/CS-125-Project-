@@ -20,22 +20,20 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 	strver = rand()%6;
 	condition = rand()%2;
 	sign = rand()%2;
-  
-   printf("%d  %d \n", strhor,strver); 
 
-   if (Pboard[strhor][strver] == 1) {   // Hit Case
+	printf("%d  %d \n", strhor,strver);
+
+	if (Pboard[strhor][strver] == 1) {   // Hit Case
 		Pboard[strhor][strver] = 2;
 		iteration = 1;
-   printf("Hit, computer takes another turn\n");
+		printf("Hit, computer takes another turn\n");
 	} else if ((Pboard[strhor][strver] == 2) || (Pboard[strhor][strver] == 0))  {   // Miss Case
-   printf("Miss, your turn\n");
+		printf("Miss, your turn\n");
 	}
 
-  while (iteration == 1) {
+	while (iteration == 1) {
 
-	  for (i = 1; i < 4; i++) {
-    
-      printf("i = %d\n", i);     
+		for (i = 1; i < 4; i++) {
 
 			if (sign == 0) {
 				h = (condition == 0)? strhor + i : strhor;
@@ -44,43 +42,41 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 				h = (condition == 0)? strhor - i : strhor;
 				v = (condition == 0)? strver : strver - i;
 			}
-			
-      printf("%d  %d \n", h,v); 
-      
-	  if (h < 0) {
-        strhor = strhor; 
-        sign = 0;
-        i = 0; 
-        continue;
-      }
-       
-      if (v < 0){
-        strver = strver;
-        sign = 0;
-        i = 0;
-        continue;
-      } 
-			
-	  if (h >= BOARD_SIZE) {
-        strhor = strhor;
-        sign = 1;
-        i = 1;
-        continue;
-      }
-      
-      if  (v >= BOARD_SIZE) {
-        strver = strver; 
-        sign = 1;
-        i = 0;
-        continue;
-      }
+
+			if (h < 0) {
+				strhor = strhor;
+				sign = 0;
+				i = 0;
+				continue;
+			}
+
+			if (v < 0) {
+				strver = strver;
+				sign = 0;
+				i = 0;
+				continue;
+			}
+
+			if (h >= BOARD_SIZE) {
+				strhor = strhor;
+				sign = 1;
+				i = 1;
+				continue;
+			}
+
+			if  (v >= BOARD_SIZE) {
+				strver = strver;
+				sign = 1;
+				i = 0;
+				continue;
+			}
 
 			if (Pboard[h][v] == 1) {
 				Pboard[h][v] = 2;
-        printf("Hit, computer takes another turn\n");
+				printf("Hit, computer takes another turn\n");
 			} else {
 				iteration = 0;
-        printf("Miss, your turn\n");
+				printf("Miss, your turn\n");
 				break;
 			}
 		}
