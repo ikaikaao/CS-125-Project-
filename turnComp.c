@@ -60,7 +60,7 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 			if (h >= BOARD_SIZE) {
 				strhor = strhor;
 				sign = 1;
-				i = 1;
+				i = 0;
 				continue;
 			}
 
