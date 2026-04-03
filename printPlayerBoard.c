@@ -41,6 +41,7 @@ void printPlayerBoard(int Pboard[BOARD_SIZE][BOARD_SIZE])
           }
       }
 
+      printf("\n");
       printf("+---------------------------+\n");                                                                    // Line 1
       printf("|           Player          |\n");                                                                    // Line 2
       printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 3
