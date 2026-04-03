@@ -9,24 +9,26 @@ Resources:
 #define BOARD_SIZE 6
 
 #include <stdio.h>
+#include "printPlayerBoard.h"
 
-void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for testing should be player board
+int turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for testing should be player board
 
 	int strhor, strver, iteration=0, h, v, condition, i, sign;     //All instances with computer board array replace with player board
 
-	printf("\nComputers Turn\n");
+	printf("COMPUTER'S TURN\n\n");
 
 	strhor = rand()%6;
 	strver = rand()%6;
 	condition = rand()%2;
 	sign = rand()%2;
 
-   	printf("(%d,%c) \n", strhor + 1,strver + 'A');
+   	printf("(%d,%c) \n",strver + 1, strhor + 'A');
 
 	if (Pboard[strhor][strver] == 1) {   // Hit Case
 		Pboard[strhor][strver] = 2;
 		iteration = 1;
 		printf("Hit, computer takes another turn\n");
+    printPlayerBoard(Pboard);
 	} else if ((Pboard[strhor][strver] == 2) || (Pboard[strhor][strver] == 0))  {   // Miss Case
 		printf("Miss, your turn\n");
 	}
@@ -71,15 +73,16 @@ void turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for
 				continue;
 			}
 
-   	    printf("(%d,%c) \n", h + 1,v + 'A');
+   	printf("(%d,%c) \n",v + 1, h + 'A');
 
 			if (Pboard[h][v] == 1) {
 				Pboard[h][v] = 2;
 				printf("Hit, computer takes another turn\n");
+        printPlayerBoard(Pboard);
 			} else {
 				iteration = 0;
 				printf("Miss, your turn\n");
-				break;
+				return 1;
 			}
 		}
 	}
