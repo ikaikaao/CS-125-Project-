@@ -55,15 +55,21 @@ int main()
       int CPboard[BOARD_SIZE][BOARD_SIZE] = {0};
       
       getCompShip(Cboard);
-      printEnemyBoard(CPboard);
       
-      // Start computers turn
-      turnComp(Pboard);  
-      printPlayerBoard(Pboard);
+      int Ccheck, Pcheck;
       
-      // Start players turn
-      turnPlayer(Cboard, CPboard);
-      printEnemyBoard(CPboard);
+      do
+      {
+          // Start computers turn
+          Ccheck = turnComp(Pboard);  
+      
+          // Start players turn
+          Pcheck = turnPlayer(Cboard, CPboard);
+          printEnemyBoard(CPboard);
+          
+      } while ((Ccheck <= 1) || (Pcheck <= 1));
+      
+
       
       return 0;
 }
