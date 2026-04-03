@@ -6,4 +6,4 @@ Version: 1.0 Mar 27, 2026
 Resources:
 */
 
-void turnComp(int Cboard[BOARD_SIZE][BOARD_SIZE]);
+int turnComp(int Cboard[BOARD_SIZE][BOARD_SIZE]);
