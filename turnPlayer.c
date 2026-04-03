@@ -9,45 +9,60 @@ Resources:
 #define BOARD_SIZE 6
 
 #include <stdio.h>
+#include "printEnemyBoard.h"
 
-void turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOARD_SIZE])
+int turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOARD_SIZE])
 {
 
       int col;
       char row;
+      int hit;
     
-      printf("PLAYER TURN\n\n");    
+      printf("\nPLAYER TURN\n\n");    
     
-      printf("Enter the X coordinate (1-6) for your guess: ");
-      scanf("%d", &col);
-      
-      if ((col < 1) || (col > 6))
+      do
       {
-          printf("Good Job\n");
-      }
+          hit = 0;
       
-      printf("Enter the Y coordinate (A-F) for your guess: ");
-      scanf(" %c", &row);
+          printf("Enter the X coordinate (1-6) for your guess: ");
+          scanf("%d", &col);
+      
+          if ((col < 1) || (col > 6))
+          {
+              printf("Ivalid Column. Try again.\n");
+              continue;
+          }
+      
+          printf("Enter the Y coordinate (A-F) for your guess: ");
+          scanf(" %c", &row);
 
-      if ((row < 'A') || (row > 'F'))
-      {
-          printf("Learn English\n");
-      }
+          if ((row < 'A') || (row > 'F'))
+          {
+              printf("Invalid row. Try again.\n");
+              continue;
+          }
       
-      int rowIndex = row - 'A';
-      int colIndex = col - 1;
+          int rowIndex = row - 'A';
+          int colIndex = col - 1;
       
-      if (Cboard[rowIndex][colIndex] == 1)
-      {
-          CPboard[rowIndex][colIndex] = 1;
-          printf("(%d,%c)\n", col, row);
-          printf("\nHit, take another turn\n");
-      }
+          if (Cboard[rowIndex][colIndex] == 1)
+          {
+              CPboard[rowIndex][colIndex] = 1;
+              printf("\n(%d,%c)\n", col, row);
+              printf("Hit, take another turn\n");
+              printEnemyBoard(CPboard);
+              hit = 1;
+          }
       
-      else if (Cboard[rowIndex][colIndex] == 0)
-      {
-          CPboard[rowIndex][colIndex] = 2;
-          printf("(%d,%c)\n", col, row);
-          printf("\nMiss, computer's turn\n"); 
-      }
+          else if (Cboard[rowIndex][colIndex] == 0)
+          {
+              CPboard[rowIndex][colIndex] = 2;
+              printf("\n(%d,%c)\n", col, row);
+              printf("Miss, computer's turn\n");
+              hit = 0;
+          }
+          
+      } while(hit);
+      
+      return 1;
 }
