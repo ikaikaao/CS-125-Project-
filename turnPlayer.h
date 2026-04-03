@@ -6,4 +6,4 @@ Version: 1.0 Mar 31, 2026
 Resources:
 */
 
-void turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOARD_SIZE]);
+int turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOARD_SIZE]);
