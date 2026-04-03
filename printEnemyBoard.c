@@ -39,7 +39,7 @@ void printEnemyBoard(int CPboard[BOARD_SIZE][BOARD_SIZE])
       }
       
 
-      
+      printf("\n");
       printf("+---------------------------+\n");                                                                    // Line 1
       printf("|          Computer         |\n");                                                                    // Line 2
       printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 3
@@ -56,6 +56,6 @@ void printEnemyBoard(int CPboard[BOARD_SIZE][BOARD_SIZE])
       printf("| E | %c | %c | %c | %c | %c | %c |\n", c[4][0], c[4][1], c[4][2], c[4][3], c[4][4], c[4][5]);        // Line 14
       printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 15
       printf("| F | %c | %c | %c | %c | %c | %c |\n", c[5][0], c[5][1], c[5][2], c[5][3], c[5][4], c[5][5]);        // Line 16
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 17
+      printf("+---+---+---+---+---+---+---+\n\n");                                                                    // Line 17
 
 }
