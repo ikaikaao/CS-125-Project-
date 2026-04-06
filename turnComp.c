@@ -33,6 +33,22 @@ int turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for 
 		printf("Miss, your turn\n");
 	}
 
+	int hits = 0, r, c;
+	for (r = 0; r < BOARD_SIZE; r++)
+	{
+		for (c = 0; c < BOARD_SIZE; c++)
+		{
+			if (Pboard[r][c] == 2)
+			{
+				hits++;
+			}
+		}
+	}
+	if (hits >= 9)
+	{
+		return 2;
+	}
+	
 	while (iteration == 1) {
 
 		for (i = 1; i < 4; i++) {
