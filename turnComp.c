@@ -79,7 +79,7 @@ int turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) {  //Using computers board for 
 				Pboard[h][v] = 2;
 				printf("Hit, computer takes another turn\n");
         printPlayerBoard(Pboard);
-			} else {
+			} else if ((Pboard[h][v] == 0) || (Pboard[h][v] == 2)){
 				iteration = 0;
 				printf("Miss, your turn\n");
 				return 1;
