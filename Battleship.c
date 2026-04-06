@@ -21,6 +21,22 @@ Resources:
 #include "turnComp.h"
 #include "turnPlayer.h"
 
+void printFile(const char *filename)
+{
+      FILE *f = fopen(filename, "r");
+      if (!f)
+      {
+            printf("Could not open %s\n", filename);
+            return;
+      }
+      char line[256];
+      while (fgets(line, sizeof(line), f))
+      {
+            printf("%s", line);
+      }
+      fclose(f);
+}
+
 int main()
 {
       // Seeding the rand function
@@ -62,10 +78,20 @@ int main()
       {
           // Start computers turn
           Ccheck = turnComp(Pboard);  
-      
+          if (Ccheck == 2)
+          {
+                printFile("youlose.txt");
+                break;
+          }
+            
           // Start players turn
           Pcheck = turnPlayer(Cboard, CPboard);
           printEnemyBoard(CPboard);
+          if (Pcheck == 2
+          {
+                printFile("youwin.txt");
+                break;
+          }
           
       } while ((Ccheck <= 1) || (Pcheck <= 1));
       
