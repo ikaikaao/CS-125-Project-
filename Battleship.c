@@ -24,16 +24,20 @@ Resources:
 void printFile(const char *filename)
 {
       FILE *f = fopen(filename, "r");
+      
       if (!f)
       {
-            printf("Could not open %s\n", filename);
-            return;
+          printf("Could not open %s\n", filename);
+          return;
       }
+      
       char line[256];
+      
       while (fgets(line, sizeof(line), f))
       {
-            printf("%s", line);
+          printf("%s", line);
       }
+      
       fclose(f);
 }
 
@@ -80,17 +84,19 @@ int main()
           Ccheck = turnComp(Pboard);  
           if (Ccheck == 2)
           {
-                printFile("youlose.txt");
-                break;
+              printFile("youlose.txt");
+              printf("\n");
+              break;
           }
             
           // Start players turn
           Pcheck = turnPlayer(Cboard, CPboard);
           printEnemyBoard(CPboard);
-          if (Pcheck == 2
+          if (Pcheck == 2)
           {
-                printFile("youwin.txt");
-                break;
+              printFile("youwin.txt");
+              printf("\n");
+              break;
           }
           
       } while ((Ccheck <= 1) || (Pcheck <= 1));
