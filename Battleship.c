@@ -2,7 +2,7 @@
 File: Battleship.c
 Authors: Aidan Monsen and Ikaikaokealohilani Ofsthun
 Purpose: Recreate Battleship in C
-Version: 1.5 Mar 27, 2026
+Version: 1.6 Apr 7, 2026
 Resources: 
 */
 
@@ -12,8 +12,6 @@ Resources:
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
-#include "computerShips.h"
-#include "playerShips.h"
 #include "getShip.h"
 #include "printPlayerBoard.h"
 #include "printEnemyBoard.h"
@@ -49,16 +47,7 @@ int main()
       // Initializiing position and orientation variables for player ships
       char so1, so2, so3, sy1, sy2, sy3;
       int sx1, sx2, sx3;
-      
-      // Setting health of player and computer ships to 1
-      P4Ship p4Ship = {1, 1, 1, 1};
-      P3Ship p3Ship = {1, 1, 1};
-      P2Ship p2Ship = {1, 1};
-      
-      C4Ship c4Ship = {1, 1, 1, 1};
-      C3Ship c3Ship = {1, 1, 1};
-      C2Ship c2Ship = {1, 1};
-      
+
       // Initalizing the player board state
       int Pboard[BOARD_SIZE][BOARD_SIZE] = {0};
 
