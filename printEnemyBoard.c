@@ -1,7 +1,7 @@
 /*
-File: turnPlayer.c
+File: printEnemyBoard.c
 Author: Aidan Monsen
-Purpose: takes the players turn
+Purpose: print out the enemys board state
 Version: 1.1 Apr 7, 2026
 Resources:
 */
@@ -9,85 +9,53 @@ Resources:
 #define BOARD_SIZE 6
 
 #include <stdio.h>
-#include "printEnemyBoard.h"
 
-int turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOARD_SIZE])
+void printEnemyBoard(int CPboard[BOARD_SIZE][BOARD_SIZE])
 {
 
-      int col;
-      char row;
-      int hit;
-    
-      printf("\nPLAYER TURN\n\n");    
-    
-      do
+      int c[6][6];
+      int row = 0;
+      int col = 0;
+      int i, k;
+      
+      // blank is no interaction yet, O = miss, X = hit
+      
+      for (k = 0; k < 6; k++)
       {
-          hit = 0;
-      
-          printf("Enter the X coordinate (1-6) for your guess: ");
-          scanf("%d", &col);
-      
-          if ((col < 1) || (col > 6))
+          for (i = 0; i < 6; i++)
           {
-              printf("Ivalid Column. Try again.\n");
-              continue;
-          }
-      
-          printf("Enter the Y coordinate (A-F) for your guess: ");
-          scanf(" %c", &row);
-          row = toupper(row);
-
-          if ((row < 'A') || (row > 'F'))
-          {
-              printf("Invalid row. Try again.\n");
-              continue;
-          }
-      
-          int rowIndex = row - 'A';
-          int colIndex = col - 1;
-
-          if (CPboard[rowIndex][colIndex] == 1 || CPboard[rowIndex][colIndex] == 2)
-          {
-                printf("You already guessed that spot! Try again.\n");
-          }
-            
-          if (Cboard[rowIndex][colIndex] == 1)
-          {
-              CPboard[rowIndex][colIndex] = 1;
-              printf("\n(%d,%c)\n", col, row);
-              printf("Hit, take another turn\n");
-              printEnemyBoard(CPboard);
-
-              int hits = 0, r, c;
+              c[k][i] = ' ';
               
-              for (r = 0; r < BOARD_SIZE; r++)
+              if (CPboard[k][i] == 1)
               {
-                  for (c = 0; c < BOARD_SIZE; c++)
-                  {
-                      if (CPboard[r][c] == 1)
-                      {
-                          hits++;
-                      }
-                  }
+                  c[k][i] = 'X';
               }
               
-              if (hits >= 9)
+              else if (CPboard[k][i] == 2)
               {
-                  return 2;
+                  c[k][i] = 'O';
               }
-  
-              hit = 1;
           }
+      }
       
-          else if (Cboard[rowIndex][colIndex] == 0)
-          {
-              CPboard[rowIndex][colIndex] = 2;
-              printf("\n(%d,%c)\n", col, row);
-              printf("Miss, computer's turn\n");
-              hit = 0;
-          }
-          
-      } while(hit);
-      
-      return 1;
+
+      printf("\n");
+      printf("+---------------------------+\n");                                                                    // Line 1
+      printf("|          Computer         |\n");                                                                    // Line 2
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 3
+      printf("|   | 1 | 2 | 3 | 4 | 5 | 6 |\n");                                                                    // Line 4
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 5
+      printf("| A | %c | %c | %c | %c | %c | %c |\n", c[0][0], c[0][1], c[0][2], c[0][3], c[0][4], c[0][5]);        // Line 6
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 7
+      printf("| B | %c | %c | %c | %c | %c | %c |\n", c[1][0], c[1][1], c[1][2], c[1][3], c[1][4], c[1][5]);        // Line 8
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 9
+      printf("| C | %c | %c | %c | %c | %c | %c |\n", c[2][0], c[2][1], c[2][2], c[2][3], c[2][4], c[2][5]);        // Line 10
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 11
+      printf("| D | %c | %c | %c | %c | %c | %c |\n", c[3][0], c[3][1], c[3][2], c[3][3], c[3][4], c[3][5]);        // Line 12
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 13
+      printf("| E | %c | %c | %c | %c | %c | %c |\n", c[4][0], c[4][1], c[4][2], c[4][3], c[4][4], c[4][5]);        // Line 14
+      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 15
+      printf("| F | %c | %c | %c | %c | %c | %c |\n", c[5][0], c[5][1], c[5][2], c[5][3], c[5][4], c[5][5]);        // Line 16
+      printf("+---+---+---+---+---+---+---+\n\n");                                                                    // Line 17
+
 }
