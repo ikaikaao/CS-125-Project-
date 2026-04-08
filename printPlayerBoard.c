@@ -2,7 +2,7 @@
 File: printPlayerBoard.c
 Author: Aidan Monsen
 Purpose: print out the players board state
-Version: 1.1 Mar 257 2026
+Version: 1.2 Apr 7, 2026
 Resources:
 */
 
