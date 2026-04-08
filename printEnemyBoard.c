@@ -1,64 +1,125 @@
 /*
-File: printPlayerBoard.c
-Author: Aidan Monsen
-Purpose: print out the players board state
-Version: 1.2 Apr 7, 2026
+File: turnComp.c
+Author: Ikaikaokealohilani Ofsthun
+Purpose: ai for computer
+Version: 1.1 Apr 7, 2026
 Resources:
 */
 
 #define BOARD_SIZE 6
 
 #include <stdio.h>
+#include "printPlayerBoard.h"
 
-void printPlayerBoard(int Pboard[BOARD_SIZE][BOARD_SIZE])
-{
+int turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) 
+{ 
 
-      int p[6][6];
-      int row = 0;
-      int col = 0;
-      int i, k;
+      int strhor, strver, iteration = 0, h, v, condition, i, sign;     
 
-      // 0 = no ship, 1 = ship
+      printf("COMPUTER'S TURN\n\n");
+
+	    strhor = rand()%6;
+  	  strver = rand()%6;
+	    condition = rand()%2;
+	    sign = rand()%2;
+
+   	  printf("(%d,%c) \n",strver + 1, strhor + 'A');
+
+	    if (Pboard[strhor][strver] == 1) // Hit Case
+      {   
+		      Pboard[strhor][strver] = 2;
+		      iteration = 1;
+		      printf("Hit, computer takes another turn\n");
+          printPlayerBoard(Pboard);
+      } 
       
-      for (k = 0; k < 6; k++)
-      {
-          for (i = 0; i < 6; i++)
-          {
-              if (Pboard[row + k][col + i] == 1)
-              {
-                  p[k][i] = 'S';
-              }
-              
-              else if (Pboard[row + k][col + i] == 2)
-              {
-                  p[k][i] = 'X';
-              }
-              
-              else
-              {
-                  p[k][i] = ' ';
+      else if ((Pboard[strhor][strver] == 2) || (Pboard[strhor][strver] == 0))  // Miss Case
+      {   
+		      printf("Miss, your turn\n");
+      }
+
+	    int hits = 0, r, c;
+	    for (r = 0; r < BOARD_SIZE; r++)
+	    {
+		      for (c = 0; c < BOARD_SIZE; c++)
+		      {
+			        if (Pboard[r][c] == 2)
+			        {
+				          hits++;
               }
           }
       }
+	
+      if (hits >= 9)
+	    {
+		      return 2;
+	    }
+	
+	    while (iteration == 1) 
+      {
 
-      printf("\n");
-      printf("+---------------------------+\n");                                                                    // Line 1
-      printf("|           Player          |\n");                                                                    // Line 2
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 3
-      printf("|   | 1 | 2 | 3 | 4 | 5 | 6 |\n");                                                                    // Line 4
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 5
-      printf("| A | %c | %c | %c | %c | %c | %c |\n", p[0][0], p[0][1], p[0][2], p[0][3], p[0][4], p[0][5]);        // Line 6: Depends on user input
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 7
-      printf("| B | %c | %c | %c | %c | %c | %c |\n", p[1][0], p[1][1], p[1][2], p[1][3], p[1][4], p[1][5]);        // Line 8: Depends on user input
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 9
-      printf("| C | %c | %c | %c | %c | %c | %c |\n", p[2][0], p[2][1], p[2][2], p[2][3], p[2][4], p[2][5]);        // Line 10: Depends on user input
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 11
-      printf("| D | %c | %c | %c | %c | %c | %c |\n", p[3][0], p[3][1], p[3][2], p[3][3], p[3][4], p[3][5]);        // Line 12: Depends on user input
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 13
-      printf("| E | %c | %c | %c | %c | %c | %c |\n", p[4][0], p[4][1], p[4][2], p[4][3], p[4][4], p[4][5]);        // Line 14: Depends on user input
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 15
-      printf("| F | %c | %c | %c | %c | %c | %c |\n", p[5][0], p[5][1], p[5][2], p[5][3], p[5][4], p[5][5]);        // Line 16: Depends on user input
-      printf("+---+---+---+---+---+---+---+\n");                                                                    // Line 17
+		      for (i = 1; i < 4; i++) 
+          {
+
+			        if (sign == 0) 
+              {
+				          h = (condition == 0)? strhor + i : strhor;
+				          v = (condition == 0)? strver : strver + i;
+			        } 
+              
+              else 
+              {
+                  h = (condition == 0)? strhor - i : strhor;
+				          v = (condition == 0)? strver : strver - i;
+			        }
+
+			        if (h < 0) 
+              {
+				          strhor = strhor;
+                  sign = 0;
+				          i = 0;
+				          continue;
+			        }
       
+			        if (v < 0) 
+              {
+				          strver = strver;
+				          sign = 0;
+				          i = 0;
+				          continue;
+			        }
 
+			        if (h >= BOARD_SIZE) 
+              {
+				          strhor = strhor;
+				          sign = 1;
+				          i = 0;
+				          continue;
+			        }
+
+			        if  (v >= BOARD_SIZE) 
+              {
+				          strver = strver;
+				          sign = 1;
+				          i = 0;
+				          continue;
+			        }
+
+              printf("(%d,%c) \n",v + 1, h + 'A');
+
+			        if (Pboard[h][v] == 1) 
+              {
+				          Pboard[h][v] = 2;
+				          printf("Hit, computer takes another turn\n");
+                  printPlayerBoard(Pboard);
+			        } 
+              
+              else if ((Pboard[h][v] == 0) || (Pboard[h][v] == 2))
+              {
+				          iteration = 0;
+                  printf("Miss, your turn\n");
+                  return 1;
+			        }
+          }
+      }
 }
