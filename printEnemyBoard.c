@@ -2,7 +2,7 @@
 File: printEnemyBoard.c
 Author: Aidan Monsen
 Purpose: print out the enemys board state
-Version: 1.0 Mar 25, 2026
+Version: 1.1 Apr 7, 2026
 Resources:
 */
 
