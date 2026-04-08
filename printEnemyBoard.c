@@ -1,7 +1,7 @@
 /*
-File: turnComp.c
-Author: Ikaikaokealohilani Ofsthun
-Purpose: ai for computer
+File: turnPlayer.c
+Author: Aidan Monsen
+Purpose: takes the players turn
 Version: 1.1 Apr 7, 2026
 Resources:
 */
@@ -9,117 +9,85 @@ Resources:
 #define BOARD_SIZE 6
 
 #include <stdio.h>
-#include "printPlayerBoard.h"
+#include "printEnemyBoard.h"
 
-int turnComp(int Pboard[BOARD_SIZE][BOARD_SIZE]) 
-{ 
+int turnPlayer(int Cboard[BOARD_SIZE][BOARD_SIZE], int CPboard[BOARD_SIZE][BOARD_SIZE])
+{
 
-      int strhor, strver, iteration = 0, h, v, condition, i, sign;     
-
-      printf("COMPUTER'S TURN\n\n");
-
-	    strhor = rand()%6;
-  	  strver = rand()%6;
-	    condition = rand()%2;
-	    sign = rand()%2;
-
-   	  printf("(%d,%c) \n",strver + 1, strhor + 'A');
-
-	    if (Pboard[strhor][strver] == 1) // Hit Case
-      {   
-		      Pboard[strhor][strver] = 2;
-		      iteration = 1;
-		      printf("Hit, computer takes another turn\n");
-          printPlayerBoard(Pboard);
-      } 
-      
-      else if ((Pboard[strhor][strver] == 2) || (Pboard[strhor][strver] == 0))  // Miss Case
-      {   
-		      printf("Miss, your turn\n");
-      }
-
-	    int hits = 0, r, c;
-	    for (r = 0; r < BOARD_SIZE; r++)
-	    {
-		      for (c = 0; c < BOARD_SIZE; c++)
-		      {
-			        if (Pboard[r][c] == 2)
-			        {
-				          hits++;
-              }
-          }
-      }
-	
-      if (hits >= 9)
-	    {
-		      return 2;
-	    }
-	
-	    while (iteration == 1) 
+      int col;
+      char row;
+      int hit;
+    
+      printf("\nPLAYER TURN\n\n");    
+    
+      do
       {
-
-		      for (i = 1; i < 4; i++) 
-          {
-
-			        if (sign == 0) 
-              {
-				          h = (condition == 0)? strhor + i : strhor;
-				          v = (condition == 0)? strver : strver + i;
-			        } 
-              
-              else 
-              {
-                  h = (condition == 0)? strhor - i : strhor;
-				          v = (condition == 0)? strver : strver - i;
-			        }
-
-			        if (h < 0) 
-              {
-				          strhor = strhor;
-                  sign = 0;
-				          i = 0;
-				          continue;
-			        }
+          hit = 0;
       
-			        if (v < 0) 
-              {
-				          strver = strver;
-				          sign = 0;
-				          i = 0;
-				          continue;
-			        }
-
-			        if (h >= BOARD_SIZE) 
-              {
-				          strhor = strhor;
-				          sign = 1;
-				          i = 0;
-				          continue;
-			        }
-
-			        if  (v >= BOARD_SIZE) 
-              {
-				          strver = strver;
-				          sign = 1;
-				          i = 0;
-				          continue;
-			        }
-
-              printf("(%d,%c) \n",v + 1, h + 'A');
-
-			        if (Pboard[h][v] == 1) 
-              {
-				          Pboard[h][v] = 2;
-				          printf("Hit, computer takes another turn\n");
-                  printPlayerBoard(Pboard);
-			        } 
-              
-              else if ((Pboard[h][v] == 0) || (Pboard[h][v] == 2))
-              {
-				          iteration = 0;
-                  printf("Miss, your turn\n");
-                  return 1;
-			        }
+          printf("Enter the X coordinate (1-6) for your guess: ");
+          scanf("%d", &col);
+      
+          if ((col < 1) || (col > 6))
+          {
+              printf("Ivalid Column. Try again.\n");
+              continue;
           }
-      }
+      
+          printf("Enter the Y coordinate (A-F) for your guess: ");
+          scanf(" %c", &row);
+          row = toupper(row);
+
+          if ((row < 'A') || (row > 'F'))
+          {
+              printf("Invalid row. Try again.\n");
+              continue;
+          }
+      
+          int rowIndex = row - 'A';
+          int colIndex = col - 1;
+
+          if (CPboard[rowIndex][colIndex] == 1 || CPboard[rowIndex][colIndex] == 2)
+          {
+                printf("You already guessed that spot! Try again.\n");
+          }
+            
+          if (Cboard[rowIndex][colIndex] == 1)
+          {
+              CPboard[rowIndex][colIndex] = 1;
+              printf("\n(%d,%c)\n", col, row);
+              printf("Hit, take another turn\n");
+              printEnemyBoard(CPboard);
+
+              int hits = 0, r, c;
+              
+              for (r = 0; r < BOARD_SIZE; r++)
+              {
+                  for (c = 0; c < BOARD_SIZE; c++)
+                  {
+                      if (CPboard[r][c] == 1)
+                      {
+                          hits++;
+                      }
+                  }
+              }
+              
+              if (hits >= 9)
+              {
+                  return 2;
+              }
+  
+              hit = 1;
+          }
+      
+          else if (Cboard[rowIndex][colIndex] == 0)
+          {
+              CPboard[rowIndex][colIndex] = 2;
+              printf("\n(%d,%c)\n", col, row);
+              printf("Miss, computer's turn\n");
+              hit = 0;
+          }
+          
+      } while(hit);
+      
+      return 1;
 }
